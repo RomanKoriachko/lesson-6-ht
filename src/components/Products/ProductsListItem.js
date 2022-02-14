@@ -11,24 +11,21 @@ import PropTypes from 'prop-types'
 
 export class ProductsListItem extends Component {
     render() {
+        const { image, name, description, type, capacity, price } = this.props
         return (
             <>
                 <Card>
                     <CardContent>
                         <div className="product-img">
-                            <img src={this.props.image} alt="iphone"></img>
+                            <img src={image} alt="iphone"></img>
                         </div>
-                        <h4>{this.props.name}</h4>
-                        <p>{this.props.description}</p>
+                        <h4>{name}</h4>
+                        <p>{description}</p>
+                        <div className="product-features">Type: {type}</div>
                         <div className="product-features">
-                            Type: {this.props.type}
+                            Capacity: {capacity} Gb
                         </div>
-                        <div className="product-features">
-                            Capacity: {this.props.capacity} Gb
-                        </div>
-                        <div className="product-price">
-                            {this.props.price} $
-                        </div>
+                        <div className="product-price">{price} $</div>
                         <div className="product-quantity">
                             <Button variant="contained">-</Button>
                             <TextField
@@ -47,18 +44,6 @@ export class ProductsListItem extends Component {
         )
     }
 }
-
-// export const ProductsListItem = ({
-//     image,
-//     name,
-//     description,
-//     type,
-//     capacity,
-//     price,
-// }) => {
-//     return (
-//     )
-// }
 
 ProductsListItem.propTypes = {
     image: PropTypes.string,
