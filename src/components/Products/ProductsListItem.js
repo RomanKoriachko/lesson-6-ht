@@ -12,6 +12,7 @@ import PropTypes from 'prop-types'
 export class ProductsListItem extends Component {
     state = {
         productCount: 1,
+        color: 'Green',
     }
 
     onIncrementClick = () => {
@@ -27,6 +28,7 @@ export class ProductsListItem extends Component {
     }
 
     render() {
+        console.log(this.state.color)
         const { image, name, description, type, capacity, price } = this.props
         return (
             <>
@@ -37,6 +39,13 @@ export class ProductsListItem extends Component {
                         </div>
                         <h4>{name}</h4>
                         <p>{description}</p>
+                        <div>Color: {this.state.color}</div>
+                        <Button
+                            variant="contained"
+                            onClick={() => this.setState({ color: 'Red' })}
+                        >
+                            Change Color
+                        </Button>
                         <div className="product-features">Type: {type}</div>
                         <div className="product-features">
                             Capacity: {capacity} Gb
