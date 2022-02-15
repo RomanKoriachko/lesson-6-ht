@@ -8,11 +8,13 @@ import {
 import React, { Component } from 'react'
 import './ProductsListItem.css'
 import PropTypes from 'prop-types'
+import { color } from '@mui/system'
 
 export class ProductsListItem extends Component {
     state = {
         productCount: 1,
         color: 'Green',
+        isToggleOn: true,
     }
 
     onIncrementClick = () => {
@@ -27,7 +29,15 @@ export class ProductsListItem extends Component {
         }))
     }
 
+    toggleColor = () => {
+        this.setState((prevState) => ({
+            isToggleOn: !prevState.isToggleOn,
+            color: this.state.isToggleOn ? 'Red' : 'Green',
+        }))
+    }
+
     render() {
+        console.log(this.state.isToggleOn)
         console.log(this.state.color)
         const { image, name, description, type, capacity, price } = this.props
         return (
@@ -40,10 +50,7 @@ export class ProductsListItem extends Component {
                         <h4>{name}</h4>
                         <p>{description}</p>
                         <div>Color: {this.state.color}</div>
-                        <Button
-                            variant="contained"
-                            onClick={() => this.setState({ color: 'Red' })}
-                        >
+                        <Button variant="contained" onClick={this.toggleColor}>
                             Change Color
                         </Button>
                         <div className="product-features">Type: {type}</div>
