@@ -14,7 +14,7 @@ export class ProductsListItem extends Component {
         productCount: 1,
         color: 'Green',
         isToggleOn: true,
-        disableDecrementButton: false,
+        disableDecrementButton: true,
         disableIncrementButton: false,
     }
 
@@ -22,9 +22,29 @@ export class ProductsListItem extends Component {
         this.setState((prevState) => ({
             productCount: prevState.productCount + 1,
         }))
+        if (this.state.productCount >= 9) {
+            this.setState({
+                disableIncrementButton: true,
+            })
+        } else {
+            this.setState({
+                disableIncrementButton: false,
+                disableDecrementButton: false,
+            })
+        }
     }
 
     onDecrementClick = () => {
+        if (this.state.productCount <= 2) {
+            this.setState({
+                disableDecrementButton: true,
+            })
+        } else if (this.state.productCount >= 2) {
+            this.setState({
+                disableDecrementButton: false,
+                disableIncrementButton: false,
+            })
+        }
         this.setState((prevState) => ({
             productCount: prevState.productCount - 1,
         }))
@@ -38,21 +58,6 @@ export class ProductsListItem extends Component {
     }
 
     render() {
-        // console.log(this.state.isToggleOn)
-        // console.log(this.state.color)
-        // console.log(this.state.disableIncrementButton)
-        if (this.state.productCount >= 10) {
-            this.state.disableIncrementButton = true
-        } else {
-            this.state.disableIncrementButton = false
-        }
-
-        if (this.state.productCount <= 1) {
-            this.state.disableDecrementButton = true
-        } else {
-            this.state.disableDecrementButton = false
-        }
-
         const { image, name, description, type, capacity, price } = this.props
         return (
             <>
