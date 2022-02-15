@@ -8,13 +8,14 @@ import {
 import React, { Component } from 'react'
 import './ProductsListItem.css'
 import PropTypes from 'prop-types'
-import { color } from '@mui/system'
 
 export class ProductsListItem extends Component {
     state = {
         productCount: 1,
         color: 'Green',
         isToggleOn: true,
+        disableDecrementButton: false,
+        disableIncrementButton: false,
     }
 
     onIncrementClick = () => {
@@ -37,8 +38,21 @@ export class ProductsListItem extends Component {
     }
 
     render() {
-        console.log(this.state.isToggleOn)
-        console.log(this.state.color)
+        // console.log(this.state.isToggleOn)
+        // console.log(this.state.color)
+        // console.log(this.state.disableIncrementButton)
+        if (this.state.productCount >= 10) {
+            this.state.disableIncrementButton = true
+        } else {
+            this.state.disableIncrementButton = false
+        }
+
+        if (this.state.productCount <= 1) {
+            this.state.disableDecrementButton = true
+        } else {
+            this.state.disableDecrementButton = false
+        }
+
         const { image, name, description, type, capacity, price } = this.props
         return (
             <>
@@ -62,6 +76,7 @@ export class ProductsListItem extends Component {
                             <Button
                                 variant="contained"
                                 onClick={this.onDecrementClick}
+                                disabled={this.state.disableDecrementButton}
                             >
                                 -
                             </Button>
@@ -73,6 +88,7 @@ export class ProductsListItem extends Component {
                             <Button
                                 variant="contained"
                                 onClick={this.onIncrementClick}
+                                disabled={this.state.disableIncrementButton}
                             >
                                 +
                             </Button>
